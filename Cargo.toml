@@ -1,0 +1,12 @@
+[package]
+name = "rusthorn"
+version = "0.1.0"
+edition = "2021"
+authors = ["XoanOuteiro"]
+description = "A Rust HTTP-Based persistence tool that allows RCE in Linux"
+license = "MIT"
+
+[dependencies]
+hyper = { version = "0.14", features = ["server", "http1", "tcp"] }
+tokio = { version = "1", features = ["full"] }
+
